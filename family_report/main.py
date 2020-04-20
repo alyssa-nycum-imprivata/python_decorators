@@ -1,35 +1,43 @@
-def kids(chore_sentence):
-    def assignment_sentence(*args, **kwargs):
-        original_sentence = chore_sentence(*args, **kwargs)
-        return original_sentence + " by the kids"
-    return assignment_sentence
+# def kids(chore):
+#     def assignment_sentence(*args, **kwargs):
+#         original_sentence = chore(*args, **kwargs)
+#         return original_sentence + " by the kids"
+#     return assignment_sentence
 
-def dad(chore_sentence):
-    def assignment_sentence(*args, **kwargs):
-        original_sentence = chore_sentence(*args, **kwargs)
-        return original_sentence + " by Dad"
-    return assignment_sentence
+# def dad(chore):
+#     def assignment_sentence(*args, **kwargs):
+#         original_sentence = chore(*args, **kwargs)
+#         return original_sentence + " by Dad"
+#     return assignment_sentence
 
-def mom(chore_sentence):
-    def assignment_sentence(*args, **kwargs):
-        original_sentence = chore_sentence(*args, **kwargs)
-        return original_sentence + " by Mom"
-    return assignment_sentence
+# def mom(chore):
+#     def assignment_sentence(*args, **kwargs):
+#         original_sentence = chore(*args, **kwargs)
+#         return original_sentence + " by Mom"
+#     return assignment_sentence
 
+# decorator for DRY code 
+def assignment(person):
+    def decorator(chore):
+        def assignment_sentence(*args, **kwargs):
+            original_sentence = chore(*args, **kwargs)
+            return original_sentence + " by " + person
+        return assignment_sentence
+    return decorator
 
-@kids
+@assignment("the kids")
 def laundry():
     return "The dirty laundry was cleaned"
 
-@dad
+@assignment("Dad")
 def garbage():
     return "The garbage was taken out"
 
-@kids
+@assignment("the kids")
 def dust():
     return "The house was dusted"
 
-@mom
+@assignment("Mom")
 def groom():
     return "The dog was brushed"
 
